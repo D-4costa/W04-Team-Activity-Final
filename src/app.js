@@ -21,10 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Habit Tracker API is running.",
-    docs: "/api-docs",
-  });
+  return res.redirect("/api-docs");
 });
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
