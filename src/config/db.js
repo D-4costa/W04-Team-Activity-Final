@@ -20,7 +20,6 @@ const connectToDatabase = async () => {
 
   await Promise.all([
     db.collection("users").createIndex({ email: 1 }, { unique: true, sparse: true }),
-    db.collection("users").createIndex({ githubId: 1 }, { unique: true, sparse: true }),
     db.collection("habits").createIndex({ userId: 1 }),
     db.collection("records").createIndex({ userId: 1 }),
     db.collection("records").createIndex({ habitId: 1 }),
