@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   return res.redirect("/api-docs");
 });
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serveFiles(swaggerDocument), swaggerUi.setup(swaggerDocument));
 app.use(apiRoutes);
 
 app.use((req, res) => {
