@@ -3,7 +3,7 @@
   "info": {
     "title": "Habit Tracker API",
     "version": "1.0.0",
-    "description": "API to manage users, habits, records and streaks with JWT authentication."
+    "description": "API to manage users, habits, records and streaks with JWT and GitHub OAuth authentication."
   },
   "servers": [
     {
@@ -22,6 +22,9 @@
     },
     {
       "name": "Streaks"
+    },
+    {
+      "name": "Auth"
     }
   ],
   "components": {
@@ -43,7 +46,11 @@
       },
       "UserCreateInput": {
         "type": "object",
-        "required": ["name", "email", "password"],
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -60,7 +67,10 @@
       },
       "UserLoginInput": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -107,6 +117,10 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "githubId": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -126,7 +140,9 @@
       },
       "HabitInput": {
         "type": "object",
-        "required": ["title"],
+        "required": [
+          "title"
+        ],
         "properties": {
           "title": {
             "type": "string"
@@ -194,7 +210,9 @@
       },
       "RecordInput": {
         "type": "object",
-        "required": ["habitId"],
+        "required": [
+          "habitId"
+        ],
         "properties": {
           "habitId": {
             "type": "string"
@@ -273,7 +291,9 @@
       },
       "StreakInput": {
         "type": "object",
-        "required": ["habitId"],
+        "required": [
+          "habitId"
+        ],
         "properties": {
           "habitId": {
             "type": "string"
@@ -351,7 +371,9 @@
   "paths": {
     "/users": {
       "post": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Register a new user",
         "requestBody": {
           "required": true,
@@ -390,7 +412,9 @@
         }
       },
       "get": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Get all users",
         "security": [
           {
@@ -422,7 +446,9 @@
     },
     "/users/login": {
       "post": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Login with email and password",
         "requestBody": {
           "required": true,
@@ -456,7 +482,9 @@
     },
     "/users/{userId}": {
       "get": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Get one user by ID",
         "security": [
           {
@@ -499,7 +527,9 @@
         }
       },
       "put": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Update user by ID",
         "security": [
           {
@@ -545,7 +575,9 @@
         }
       },
       "delete": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Delete user by ID",
         "security": [
           {
@@ -583,7 +615,9 @@
     },
     "/habits": {
       "post": {
-        "tags": ["Habits"],
+        "tags": [
+          "Habits"
+        ],
         "summary": "Create a habit",
         "security": [
           {
@@ -616,7 +650,9 @@
         }
       },
       "get": {
-        "tags": ["Habits"],
+        "tags": [
+          "Habits"
+        ],
         "summary": "Get habits for authenticated user",
         "security": [
           {
@@ -648,7 +684,9 @@
     },
     "/habits/{habitId}": {
       "get": {
-        "tags": ["Habits"],
+        "tags": [
+          "Habits"
+        ],
         "summary": "Get one habit by ID",
         "security": [
           {
@@ -691,7 +729,9 @@
         }
       },
       "put": {
-        "tags": ["Habits"],
+        "tags": [
+          "Habits"
+        ],
         "summary": "Update one habit by ID",
         "security": [
           {
@@ -737,7 +777,9 @@
         }
       },
       "delete": {
-        "tags": ["Habits"],
+        "tags": [
+          "Habits"
+        ],
         "summary": "Delete one habit by ID",
         "security": [
           {
@@ -775,7 +817,9 @@
     },
     "/records": {
       "post": {
-        "tags": ["Records"],
+        "tags": [
+          "Records"
+        ],
         "summary": "Create a record",
         "security": [
           {
@@ -808,7 +852,9 @@
         }
       },
       "get": {
-        "tags": ["Records"],
+        "tags": [
+          "Records"
+        ],
         "summary": "Get records for authenticated user",
         "security": [
           {
@@ -862,7 +908,9 @@
     },
     "/records/{recordId}": {
       "get": {
-        "tags": ["Records"],
+        "tags": [
+          "Records"
+        ],
         "summary": "Get one record by ID",
         "security": [
           {
@@ -905,7 +953,9 @@
         }
       },
       "put": {
-        "tags": ["Records"],
+        "tags": [
+          "Records"
+        ],
         "summary": "Update one record by ID",
         "security": [
           {
@@ -951,7 +1001,9 @@
         }
       },
       "delete": {
-        "tags": ["Records"],
+        "tags": [
+          "Records"
+        ],
         "summary": "Delete one record by ID",
         "security": [
           {
@@ -989,7 +1041,9 @@
     },
     "/streaks": {
       "post": {
-        "tags": ["Streaks"],
+        "tags": [
+          "Streaks"
+        ],
         "summary": "Create a streak",
         "security": [
           {
@@ -1022,7 +1076,9 @@
         }
       },
       "get": {
-        "tags": ["Streaks"],
+        "tags": [
+          "Streaks"
+        ],
         "summary": "Get streaks for authenticated user",
         "security": [
           {
@@ -1067,7 +1123,9 @@
     },
     "/streaks/{streakId}": {
       "get": {
-        "tags": ["Streaks"],
+        "tags": [
+          "Streaks"
+        ],
         "summary": "Get one streak by ID",
         "security": [
           {
@@ -1110,7 +1168,9 @@
         }
       },
       "put": {
-        "tags": ["Streaks"],
+        "tags": [
+          "Streaks"
+        ],
         "summary": "Update one streak by ID",
         "security": [
           {
@@ -1156,7 +1216,9 @@
         }
       },
       "delete": {
-        "tags": ["Streaks"],
+        "tags": [
+          "Streaks"
+        ],
         "summary": "Delete one streak by ID",
         "security": [
           {
@@ -1185,6 +1247,93 @@
           },
           "404": {
             "description": "Not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/auth/github": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Start GitHub OAuth login flow",
+        "responses": {
+          "302": {
+            "description": "Redirects to GitHub for authentication"
+          },
+          "400": {
+            "description": "GitHub OAuth not configured"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/auth/github/callback": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "GitHub OAuth callback endpoint",
+        "responses": {
+          "302": {
+            "description": "GitHub authentication successful and redirected to /api-docs"
+          },
+          "400": {
+            "description": "Invalid OAuth callback data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/auth/callback": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Alias callback endpoint for GitHub OAuth",
+        "responses": {
+          "302": {
+            "description": "GitHub authentication successful and redirected to /api-docs"
+          },
+          "400": {
+            "description": "Invalid OAuth callback data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout current OAuth session",
+        "responses": {
+          "302": {
+            "description": "Logout successful and redirected to /"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout current OAuth session",
+        "responses": {
+          "200": {
+            "description": "Logout successful"
           },
           "500": {
             "description": "Server error"
