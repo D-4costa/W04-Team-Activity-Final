@@ -14,6 +14,12 @@ const swaggerDocument = require("../swagger/swagger.json");
 configurePassport();
 
 const app = express();
+const isProduction = process.env.NODE_ENV === "production";
+
+if (isProduction) {
+  // Required on Render/Heroku-style proxies so secure session cookies are persisted.
+  app.set("trust proxy", 1);
+}
 
 const allowedOrigins = process.env.CORS_ORIGIN
   ? process.env.CORS_ORIGIN.split(",").map((origin) => origin.trim())
@@ -31,11 +37,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "change-this-session-secret",
+    proxy: isProduction,
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: isProduction,
       sameSite: "lax",
     },
   })

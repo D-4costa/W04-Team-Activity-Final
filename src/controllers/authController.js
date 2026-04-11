@@ -123,6 +123,18 @@ const githubCallback = (req, res, next) => {
 
         if (req.session) {
           req.session.jwtToken = token;
+          return req.session.save((sessionError) => {
+            if (sessionError) {
+              console.error(sessionError);
+              return res.status(500).json({ message: "Session persistence failed." });
+            }
+
+            if (typeof next === "function") {
+              return next();
+            }
+
+            return res.status(200).json(req.oauthResult);
+          });
         }
 
         if (typeof next === "function") {
